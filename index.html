@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBE Results Guide for Parents</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js"></script>
+
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .grade-card {
+            transition: all 0.3s ease;
+        }
+        .grade-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .pathway-card {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .pathway-card:hover {
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+        }
+        .info-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .faq-item {
+            transition: all 0.3s;
+        }
+        .faq-item:hover {
+            background-color: #f9fafb;
+        }
+        .subject-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            animation: slideDown 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .tab-button:hover {
+            background-color: #f3f4f6;
+        }
+        .tab-button.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen p-4">
+    <div class="max-w-6xl mx-auto">
+        <!-- Hero Header -->
+        <div class="info-section rounded-2xl shadow-2xl p-8 mb-8 text-white">
+            <div class="flex items-center gap-4 mb-4">
+                <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+                <div>
+                    <h1 class="text-4xl font-bold">CBE Results Guide for Parents</h1>
+                    <p class="text-indigo-100 text-lg mt-2">Complete guide to understanding your child's progress</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4 mt-6">
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+                    <div class="text-3xl font-bold">10</div>
+                    <div class="text-sm">Subjects Covered</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+                    <div class="text-3xl font-bold">5</div>
+                    <div class="text-sm">Career Pathways</div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+                    <div class="text-3xl font-bold">4</div>
+                    <div class="text-sm">Grade Levels</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Navigation Tabs -->
+        <div class="bg-white rounded-xl shadow-lg mb-6">
+            <div class="flex overflow-x-auto border-b">
+                <button class="tab-button active" onclick="switchTab('understanding')">Understanding Grades</button>
+                <button class="tab-button" onclick="switchTab('checker')">Grade Checker</button>
+                <button class="tab-button" onclick="switchTab('pathways')">Career Pathways</button>
+                <button class="tab-button" onclick="switchTab('subjects')">Subject Details</button>
+                <button class="tab-button" onclick="switchTab('faq')">FAQs</button>
+                <button class="tab-button" onclick="switchTab('upload')">Upload</button>
+            </div>
+
+            <!-- Tab 1: Understanding Grades -->
+            <div id="understanding" class="tab-content active p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Understanding the CBE Grading System</h2>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r-lg">
+                    <h3 class="font-bold text-lg mb-2">📌 What is CBE?</h3>
+                    <p class="text-gray-700">Competency-Based Education (CBE) focuses on what your child can actually DO with their knowledge, not just what they memorize. It measures practical skills and understanding.</p>
+                </div>
+
+                <div class="space-y-4 mb-6">
+                    <div class="grade-card border-l-4 border-green-500 bg-gradient-to-r from-green-50 to-green-100 p-6 rounded-r-xl shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-3xl font-bold text-gray-800">E</span>
+                                <span class="ml-3 text-xl font-semibold text-gray-700">Exceeds Expectations</span>
+                            </div>
+                            <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-gray-700 shadow">80-100%</span>
+                        </div>
+                        <p class="text-gray-700 mb-3"><strong>What it means:</strong> Outstanding performance! Your child has mastered the content and can apply it confidently in new situations.</p>
+                        <button onclick="showGradeDetails('E')" class="text-green-700 font-semibold hover:underline">→ See detailed explanation</button>
+                    </div>
+
+                    <div class="grade-card border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-r-xl shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-3xl font-bold text-gray-800">M</span>
+                                <span class="ml-3 text-xl font-semibold text-gray-700">Meets Expectations</span>
+                            </div>
+                            <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-gray-700 shadow">60-79%</span>
+                        </div>
+                        <p class="text-gray-700 mb-3"><strong>What it means:</strong> Good performance! Your child has achieved the required competencies and can handle grade-level work.</p>
+                        <button onclick="showGradeDetails('M')" class="text-blue-700 font-semibold hover:underline">→ See detailed explanation</button>
+                    </div>
+
+                    <div class="grade-card border-l-4 border-yellow-500 bg-gradient-to-r from-yellow-50 to-yellow-100 p-6 rounded-r-xl shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-3xl font-bold text-gray-800">A</span>
+                                <span class="ml-3 text-xl font-semibold text-gray-700">Approaches Expectations</span>
+                            </div>
+                            <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-gray-700 shadow">40-59%</span>
+                        </div>
+                        <p class="text-gray-700 mb-3"><strong>What it means:</strong> Developing! Your child is making progress but needs more practice, time, and support to reach grade-level standards.</p>
+                        <button onclick="showGradeDetails('A')" class="text-yellow-700 font-semibold hover:underline">→ See detailed explanation</button>
+                    </div>
+
+                    <div class="grade-card border-l-4 border-red-500 bg-gradient-to-r from-red-50 to-red-100 p-6 rounded-r-xl shadow-md">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-3xl font-bold text-gray-800">B</span>
+                                <span class="ml-3 text-xl font-semibold text-gray-700">Below Expectations</span>
+                            </div>
+                            <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-gray-700 shadow">0-39%</span>
+                        </div>
+                        <p class="text-gray-700 mb-3"><strong>What it means:</strong> Needs immediate support! Your child requires additional help and intervention to build foundational understanding.</p>
+                        <button onclick="showGradeDetails('B')" class="text-red-700 font-semibold hover:underline">→ See detailed explanation</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Grade Checker -->
+            <div id="checker" class="tab-content p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Check Your Child's Grade</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select Subject</label>
+                        <select id="subjectSelect" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <option value="">Choose a subject...</option>
+                            <option value="English">English</option>
+                            <option value="Kiswahili">Kiswahili</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Integrated Science">Integrated Science</option>
+                            <option value="Health Education">Health Education</option>
+                            <option value="Pre-Technical Studies">Pre-Technical Studies</option>
+                            <option value="Social Studies">Social Studies</option>
+                            <option value="Religious Education">Religious Education</option>
+                            <option value="Creative Arts">Creative Arts</option>
+                            <option value="Agriculture">Agriculture</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Grade Received</label>
+                        <select id="gradeSelect" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <option value="">Select grade...</option>
+                            <option value="E">E (Exceeds Expectations)</option>
+                            <option value="M">M (Meets Expectations)</option>
+                            <option value="A">A (Approaches Expectations)</option>
+                            <option value="B">B (Below Expectations)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="gradeResult" class="hidden"></div>
+            </div>
+
+             <!-- Tab 3: Upload pdf -->
+              <div id="checker" class="tab-content p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Check Your Child's Grade</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div>
+              <form id="uploadForm">
+            <input type="file" id="pdfFile" accept="application/pdf" required />
+            <button type="submit">Upload & Analyze</button>
+            </form>
+
+            <pre id="output"></pre>
+
+            <script>
+            const form = document.getElementById("uploadForm");
+            const output = document.getElementById("output");
+
+            form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const file = document.getElementById("pdfFile").files[0];
+            const formData = new FormData();
+            formData.append("pdf", file);
+
+    const res = await fetch("/.netlify/functions/analyze", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+    output.textContent = JSON.stringify(data, null, 2);
+  });
+</script>
+
+
+
+
+
+            <!-- Tab 4: Pathways -->
+            <div id="pathways" class="tab-content p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Educational Pathways & Career Options</h2>
+                
+                <p class="text-gray-600 mb-6">
+                    Based on your child's strengths in specific subjects, they can pursue different pathways in Junior Secondary School (Grades 7-9) that lead to exciting career opportunities:
+                </p>
+
+                <div class="space-y-4">
+                    <div class="pathway-card border-2 border-gray-200 rounded-xl p-6 bg-gradient-to-br from-blue-50 to-cyan-50">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🔬</span>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-xl text-gray-800 mb-2">Science, Technology, Engineering & Mathematics (STEM)</h3>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Key Subjects:</p>
+                                    <div>
+                                        <span class="subject-badge bg-blue-200 text-blue-800">Mathematics</span>
+                                        <span class="subject-badge bg-blue-200 text-blue-800">Integrated Science</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">What Your Child Needs:</p>
+                                    <p class="text-sm text-gray-600">Strong performance (preferably E or M grades) in Mathematics and Integrated Science</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Future Careers:</p>
+                                    <p class="text-sm text-gray-600">Engineering, Medicine, Pharmacy, Architecture, Data Science, Laboratory Technology, Biotechnology, Aviation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pathway-card border-2 border-gray-200 rounded-xl p-6 bg-gradient-to-br from-purple-50 to-pink-50">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">📚</span>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-xl text-gray-800 mb-2">Social Sciences & Humanities</h3>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Key Subjects:</p>
+                                    <div>
+                                        <span class="subject-badge bg-purple-200 text-purple-800">Social Studies</span>
+                                        <span class="subject-badge bg-purple-200 text-purple-800">English</span>
+                                        <span class="subject-badge bg-purple-200 text-purple-800">Kiswahili</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">What Your Child Needs:</p>
+                                    <p class="text-sm text-gray-600">Strong performance in languages and Social Studies, good communication skills</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Future Careers:</p>
+                                    <p class="text-sm text-gray-600">Law, Psychology, Sociology, Economics, Political Science, Journalism, International Relations, Teaching, Social Work</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pathway-card border-2 border-gray-200 rounded-xl p-6 bg-gradient-to-br from-pink-50 to-red-50">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🎨</span>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-xl text-gray-800 mb-2">Arts, Sports & Creative Industries</h3>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Key Subjects:</p>
+                                    <div>
+                                        <span class="subject-badge bg-pink-200 text-pink-800">Creative Arts</span>
+                                        <span class="subject-badge bg-pink-200 text-pink-800">Languages</span>
+                                        <span class="subject-badge bg-pink-200 text-pink-800">Physical Education</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">What Your Child Needs:</p>
+                                    <p class="text-sm text-gray-600">Creativity, artistic talent, and strong performance in Creative Arts</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Future Careers:</p>
+                                    <p class="text-sm text-gray-600">Music, Fine Arts, Drama, Film Production, Graphic Design, Animation, Fashion Design, Sports Management, Photography</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                                                               
+                    <div class="pathway-card border-2 border-gray-200 rounded-xl p-6 bg-gradient-to-br from-orange-50 to-yellow-50">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🔧</span>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-xl text-gray-800 mb-2">Technical & Applied Sciences</h3>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Key Subjects:</p>
+                                    <div>
+                                        <span class="subject-badge bg-orange-200 text-orange-800">Pre-Technical Studies</span>
+                                        <span class="subject-badge bg-orange-200 text-orange-800">Mathematics</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">What Your Child Needs:</p>
+                                    <p class="text-sm text-gray-600">Practical skills, problem-solving ability, and interest in hands-on work</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Future Careers:</p>
+                                    <p class="text-sm text-gray-600">Carpentry, Plumbing, Electrical Installation, Welding, Automotive Technology, Construction, Masonry, HVAC Technology</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pathway-card border-2 border-gray-200 rounded-xl p-6 bg-gradient-to-br from-green-50 to-teal-50">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">💼</span>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-xl text-gray-800 mb-2">Business & Entrepreneurship</h3>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Key Subjects:</p>
+                                    <div>
+                                        <span class="subject-badge bg-green-200 text-green-800">Mathematics</span>
+                                        <span class="subject-badge bg-green-200 text-green-800">Languages</span>
+                                        <span class="subject-badge bg-green-200 text-green-800">Social Studies</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="text-sm font-medium text-gray-700 mb-1">What Your Child Needs:</p>
+                                    <p class="text-sm text-gray-600">Good numeracy skills, communication ability, and interest in business</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-700 mb-1">Future Careers:</p>
+                                    <p class="text-sm text-gray-600">Business Management, Accounting, Marketing, Entrepreneurship, Banking, Finance, Human Resources, Supply Chain Management</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Subjects -->
+            <div id="subjects" class="tab-content p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Understanding Each Subject</h2>
+                
+                <div class="space-y-4">
+                    <div class="border-2 border-indigo-200 rounded-lg p-4 bg-indigo-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">📝 English</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Reading comprehension, writing skills, speaking, listening, grammar, and literature</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Essential for communication in all careers and further education</p>
+                    </div>
+
+                    <div class="border-2 border-indigo-200 rounded-lg p-4 bg-indigo-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">📝 Kiswahili</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> National language proficiency, reading, writing, and cultural understanding</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Essential for national identity and communication across East Africa</p>
+                    </div>
+
+                    <div class="border-2 border-blue-200 rounded-lg p-4 bg-blue-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🔢 Mathematics</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Numbers, algebra, geometry, measurement, data handling, problem-solving</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Foundation for STEM careers, business, and daily life calculations</p>
+                    </div>
+
+                    <div class="border-2 border-green-200 rounded-lg p-4 bg-green-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🔬 Integrated Science</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Biology, Chemistry, Physics concepts, scientific method, and experiments</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Opens doors to medicine, engineering, and all science-based careers</p>
+                    </div>
+
+                    <div class="border-2 border-red-200 rounded-lg p-4 bg-red-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">❤️ Health Education</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Personal hygiene, nutrition, disease prevention, mental health, first aid</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Essential life skills for healthy living and healthcare careers</p>
+                    </div>
+
+                    <div class="border-2 border-orange-200 rounded-lg p-4 bg-orange-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🔧 Pre-Technical Studies</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Basic technical skills, tool use, simple construction, problem-solving</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Foundation for technical trades and hands-on careers</p>
+                    </div>
+
+                    <div class="border-2 border-purple-200 rounded-lg p-4 bg-purple-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🌍 Social Studies</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> History, geography, civics, government, economics, and cultural studies</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Understanding society, citizenship, and preparation for social science careers</p>
+                    </div>
+
+                    <div class="border-2 border-yellow-200 rounded-lg p-4 bg-yellow-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🙏 Religious Education</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Moral values, ethics, religious teachings, and character development</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Builds moral foundation and understanding of diverse beliefs</p>
+                    </div>
+
+                    <div class="border-2 border-pink-200 rounded-lg p-4 bg-pink-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🎨 Creative Arts</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Music, drama, visual arts, dance, and creative expression</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Develops creativity, self-expression, and opens arts career paths</p>
+                    </div>
+
+                    <div class="border-2 border-teal-200 rounded-lg p-4 bg-teal-50">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">🌾 Agriculture</h3>
+                        <p class="text-sm text-gray-700 mb-2"><strong>What your child learns:</strong> Crop farming, animal husbandry, soil science, agricultural business</p>
+                        <p class="text-sm text-gray-700"><strong>Why it matters:</strong> Food security knowledge and agribusiness career foundation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 5: FAQ -->
+            <div id="faq" class="tab-content p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+                
+                <div class="space-y-3">
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: What if my child gets different grades in different subjects?</h3>
+                        <p class="text-gray-600 text-sm">This is completely normal! Children have different strengths. Focus on building their strengths while providing support in areas where they need improvement.</p>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: Can my child change pathways later?</h3>
+                        <p class="text-gray-600 text-sm">Yes! Pathways are flexible. Students can adjust their pathway based on their progress and changing interests in Grade 7-9.</p>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: How many subjects should my child excel in?</h3>
+                        <p class="text-gray-600 text-sm">It's better to excel in a few subjects related to their chosen pathway than to be average in everything. Depth is more valuable than breadth.</p>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: What should I do if my child gets a 'B' grade?</h3>
+                        <p class="text-gray-600 text-sm">Don't panic! First, talk to the teacher to understand specific challenges. Arrange for extra tutoring, spend more practice time at home, and ensure your child gets adequate sleep and nutrition. Monitor progress and celebrate small improvements.</p>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: Is CBE better than the old 8-4-4 system?</h3>
+                        <p class="text-gray-600 text-sm">CBE focuses on practical skills and understanding rather than just memorization. It prepares children for real-world challenges and allows them to develop at their own pace in different subjects.</p>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: How can I help my child at home?</h3>
+                        <p class="text-gray-600 text-sm">Create a quiet study space, maintain consistent study routines, show interest in their learning, help with homework (but let them think first!), and communicate regularly with teachers.</p>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-2">Q: When should my child choose a pathway?</h3>
+                        <p class="text-gray-600 text-sm">The formal pathway selection happens when transitioning from Grade 6 to Junior Secondary (Grade 7). However, it's good to start observing their interests and strengths earlier.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Tips Card -->
+        <div class="bg-gradient-to-r from-green-500 to-teal-500 rounded-xl shadow-lg p-8 text-white mb-6">
+            <h2 class="text-2xl font-bold mb-4">💡 How to Support Your Child's Learning</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+                    <h3 class="font-bold mb-2">✅ Do This</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li>• Celebrate effort, not just results</li>
+                        <li>• Create consistent study routines</li>
+                        <li>• Communicate with teachers regularly</li>
+                        <li>• Encourage questions and curiosity</li>
+                        <li>• Provide healthy meals and adequate sleep</li>
+                    </ul>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur-sm">
+                    <h3 class="font-bold mb-2">❌ Avoid This</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li>• Comparing your child to others</li>
+                        <li>• Punishing for poor grades</li>
+                        <li>• Doing homework for them</li>
+                        <li>• Overloading with extra classes</li>
+                        <li>• Ignoring their interests and strengths</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Teachers CTA -->
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Still Have Questions?</h3>
+            <p class="text-gray-600 mb-4">Your child's teachers are your best resource for understanding their specific progress and needs.</p>
+            <button onclick="alert('Please visit your child\'s school or call during office hours to speak with teachers.')" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition font-medium">
+                Contact Teacher Guidelines
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for Grade Details -->
+    <div id="gradeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const gradeInfo = {
+            'E': {
+                range: '80-100%',
+                meaning: 'Exceeds Expectations',
+                color: 'border-green-500 bg-green-50',
+                description: 'Outstanding performance! Your child has mastered the content and can apply it confidently.',
+                details: `
+                    <h3 class="text-2xl font-bold text-green-700 mb-4">Grade E: Exceeds Expectations</h3>
+                    <p class="mb-4"><strong>What this means in practice:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2 mb-4">
+                        <li>Your child not only understands the content but can apply it in new situations</li>
+                        <li>They can explain concepts to others</li>
+                        <li>They show creativity and critical thinking beyond the syllabus</li>
+                        <li>They complete tasks independently and accurately</li>
+                    </ul>
+                    <p class="mb-4"><strong>What to do:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Encourage them to help struggling classmates</li>
+                        <li>Provide challenging extension activities</li>
+                        <li>Consider advanced materials or competitions</li>
+                        <li>Support their passion for the subject</li>
+                    </ul>
+                `
+            },
+            'M': {
+                range: '60-79%',
+                meaning: 'Meets Expectations',
+                color: 'border-blue-500 bg-blue-50',
+                description: 'Good performance! Your child has achieved the required competencies for this level.',
+                details: `
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4">Grade M: Meets Expectations</h3>
+                    <p class="mb-4"><strong>What this means in practice:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2 mb-4">
+                        <li>Your child has achieved all grade-level competencies</li>
+                        <li>They can complete assignments with minimal help</li>
+                        <li>They understand core concepts and can apply them</li>
+                        <li>They're on track for the next grade level</li>
+                    </ul>
+                    <p class="mb-4"><strong>What to do:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Continue supporting consistent study habits</li>
+                        <li>Encourage deeper understanding through discussions</li>
+                        <li>Provide opportunities for practice and review</li>
+                        <li>Maintain regular check-ins about schoolwork</li>
+                    </ul>
+                `
+            },
+            'A': {
+                range: '40-59%',
+                meaning: 'Approaches Expectations',
+                color: 'border-yellow-500 bg-yellow-50',
+                description: 'Developing! Your child is making progress but needs more practice and support.',
+                details: `
+                    <h3 class="text-2xl font-bold text-yellow-700 mb-4">Grade A: Approaches Expectations</h3>
+                    <p class="mb-4"><strong>What this means in practice:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2 mb-4">
+                        <li>Your child is making progress but hasn't mastered all concepts yet</li>
+                        <li>They may struggle with some assignments</li>
+                        <li>They need more practice and support to reach grade level</li>
+                        <li>With help, they can improve significantly</li>
+                    </ul>
+                    <p class="mb-4"><strong>What to do:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Meet with the teacher to identify specific gaps</li>
+                        <li>Set up extra practice time at home (15-30 min daily)</li>
+                        <li>Consider peer tutoring or study groups</li>
+                        <li>Break down complex tasks into smaller steps</li>
+                        <li>Celebrate small improvements to build confidence</li>
+                    </ul>
+                `
+            },
+            'B': {
+                range: '0-39%',
+                meaning: 'Below Expectations',
+                color: 'border-red-500 bg-red-50',
+                description: 'Needs support! Your child requires additional help to build understanding.',
+                details: `
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">Grade B: Below Expectations</h3>
+                    <p class="mb-4"><strong>What this means in practice:</strong></p>
+                    <ul class="list-disc pl-6 space-y-2 mb-4">
+                        <li>Your child is significantly below grade level in this subject</li>
+                        <li>They may have foundational gaps that need addressing</li>
+                        <li>They need immediate intervention and support</li>
+                        <li>This doesn't mean they can't catch up with proper help</li>
+                    </ul>
+                    <p class="mb-4"><strong>What to do (URGENT):</strong></p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>Schedule a parent-teacher conference immediately</strong></li>
+                        <li>Ask for a specific remedial plan from the school</li>
+                        <li>Consider professional tutoring services</li>
+                        <li>Check for non-academic issues (vision, hearing, attention)</li>
+                        <li>Ensure basic needs are met (sleep, nutrition, emotional support)</li>
+                        <li>Create a structured daily study routine</li>
+                        <li>Monitor progress weekly</li>
+                    </ul>
+                    <p class="bg-red-100 p-3 rounded mt-4"><strong>Remember:</strong> Every child can improve with the right support. Stay positive and patient!</p>
+                `
+            }
+        };
+
+        let currentTab = 'understanding';
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            currentTab = tabName;
+        }
+
+        function showGradeDetails(grade) {
+            const info = gradeInfo[grade];
+            document.getElementById('modalBody').innerHTML = info.details;
+            document.getElementById('gradeModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('gradeModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('gradeModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function updateGradeResult() {
+            const subject = document.getElementById('subjectSelect').value;
+            const grade = document.getElementById('gradeSelect').value;
+            const resultDiv = document.getElementById('gradeResult');
+
+            if (subject && grade) {
+                const info = gradeInfo[grade];
+                resultDiv.innerHTML = `
+                    <div class="border-l-4 ${info.color} p-6 rounded-r-xl shadow-lg">
+                        <h3 class="font-bold text-2xl mb-3">${subject}: Grade ${grade}</h3>
+                        <p class="text-gray-700 mb-3 text-lg">${info.description}</p>
+                        <div class="bg-white p-4 rounded-lg mt-3 shadow-sm">
+                            <p class="text-sm text-gray-600 mb-2">
+                                <strong>Score Range:</strong> ${info.range}
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                <strong>Performance Level:</strong> ${info.meaning}
+                            </p>
+                        </div>
+                        <button onclick="showGradeDetails('${grade}')" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+                            See Detailed Guidance
+                        </button>
+                    </div>
+                `;
+                resultDiv.classList.remove('hidden');
+            } else {
+                resultDiv.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('subjectSelect').addEventListener('change', updateGradeResult);
+        document.getElementById('gradeSelect').addEventListener('change', updateGradeResult);
+    </script>
+</body>
+</html>

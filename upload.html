@@ -1,0 +1,29 @@
+<div class="bg-white p-6 rounded-xl shadow">
+  <form id="uploadForm" class="space-y-4">
+    <label class="block font-medium">
+      Upload CBC Results (PDF only)
+    </label>
+
+    <input
+      type="file"
+      id="pdfFile"
+      accept="application/pdf"
+      required
+      class="block w-full border rounded p-2"
+    />
+
+    <button
+      type="submit"
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+    >
+      Upload & Analyze
+    </button>
+  </form>
+
+  <div id="loading" class="hidden mt-4 text-blue-600">
+    Analyzing results, please wait…
+  </div>
+
+  <div id="results" class="mt-6"></div>
+</div>
+
